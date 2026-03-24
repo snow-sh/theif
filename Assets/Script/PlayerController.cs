@@ -28,19 +28,15 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = (camForward * moveForward) + (camRight * moveSide);
 
-        // if (direction.magnitude >= 0.1f)
-        // {
-        //     Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //     transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (direction.magnitude >= 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        //     transform.Translate(direction * walkSpeed * Time.deltaTime, Space.World);
-        // }
+            transform.Translate(direction * walkSpeed * Time.deltaTime, Space.World);
+        }
 
-        if (direction.magnitude > 0.1f) 
-{
-    Quaternion targetRotation = Quaternion.LookRotation(direction);
-    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-}
+
 
         if (anim != null)
             anim.SetFloat("Speed", direction.magnitude);
