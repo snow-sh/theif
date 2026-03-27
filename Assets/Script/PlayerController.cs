@@ -14,31 +14,34 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+
     void Update()
+{
+    float moveForward = Input.GetAxis("Vertical"); 
+    float moveSide = Input.GetAxis("Horizontal");
+
+    Vector3 camForward = Camera.main.transform.forward;
+    Vector3 camRight = Camera.main.transform.right;
+
+    camForward.y = 0;
+    camRight.y = 0;
+
+    camForward = camForward.normalized; 
+    camRight = camRight.normalized;     
+
+    Vector3 direction = (camForward * moveForward) + (camRight * moveSide);
+
+    if (direction.magnitude >= 0.1f)
     {
-        float moveForward = Input.GetAxis("Vertical"); 
-        float moveSide = Input.GetAxis("Horizontal");
+        direction.y = 0; 
 
-        Vector3 camForward = Camera.main.transform.forward;
-        Vector3 camRight = Camera.main.transform.right;
-        camForward.y = 0;
-        camRight.y = 0;
-        camForward = camForward.normalized; 
-        camRight = camRight.normalized;     
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        Vector3 direction = (camForward * moveForward) + (camRight * moveSide);
-
-        if (direction.magnitude >= 0.1f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            transform.Translate(direction * walkSpeed * Time.deltaTime, Space.World);
-        }
-
-
-
-        if (anim != null)
-            anim.SetFloat("Speed", direction.magnitude);
+        transform.Translate(direction * walkSpeed * Time.deltaTime, Space.World);
     }
+
+    if (anim != null)
+        anim.SetFloat("Speed", direction.magnitude);
+}
 }
