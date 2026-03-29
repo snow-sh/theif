@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            if (anim != null) anim.SetTrigger("Jump");
-        }
+    if (Input.GetButtonDown("Jump") && isGrounded)
+{
+    rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+    
+    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    if (anim != null) anim.SetTrigger("Jump");
+}
 
         if (anim != null) anim.SetFloat("Speed", direction.magnitude);
     }

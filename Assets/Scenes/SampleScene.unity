@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 490f025e5989824e398bd45c30022761, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1326,7 +1326,7 @@ Rigidbody:
   m_GameObject: {fileID: 487179893}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.1
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1351,7 +1351,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487179893}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fe4fb6e41f45c5d18942114041e7156d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
